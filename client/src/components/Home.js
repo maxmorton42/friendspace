@@ -40,8 +40,10 @@ class Home extends React.Component {
       return (
         <div>
           <br />
-          <Header as='h1'>Friend Burk</Header>
+          <Header as='h1'>Friend Burk: Suggested Friends</Header>
           <br />
+          <Card.Group itemsPerRow={4}>
+        { this.state.friends.map( friend =>
           <Card key={friend.id}>
             <Image src={friend.avatar} />
             <Card.Content>
@@ -68,6 +70,8 @@ class Home extends React.Component {
               </Button>
             </Card.Content>
           </Card>
+        )}
+            </Card.Group>
           <Link to="/my_friends">
             <Button color="blue">
               My Friends
