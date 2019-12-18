@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import { Link, } from 'react-router-dom';
 import { Header, Image, Card, Button, Icon, } from 'semantic-ui-react';
+import styled from 'styled-components';
 
 class Home extends React.Component {
   state = { friends: [], };
@@ -40,8 +41,15 @@ class Home extends React.Component {
       return (
         <div>
           <br />
-          <Header as='h1'>Friend Burk: Suggested Friends</Header>
+          <Header as={HeaderText}>Friend Burk: Suggested Friends</Header>
           <br />
+          <Link to="/my_friends">
+            <Button color="blue">
+              My Friends
+            </Button>
+          <br />
+          </Link>
+          <hr />
           <Card.Group itemsPerRow={4}>
         { this.state.friends.map( friend =>
           <Card key={friend.id}>
@@ -61,22 +69,17 @@ class Home extends React.Component {
               <Button color="red" icon basic
               onClick={() => this.downVote(friend.id)}
               >
-                <Icon name="thumbs down" />
+                <Icon name="eye slash" />
               </Button>
               <Button color="green" icon basic
               onClick={() => this.friendRequest(friend.id)}
               >
-                <Icon name="thumbs up" />
+                <Icon name="heart" />
               </Button>
             </Card.Content>
           </Card>
         )}
             </Card.Group>
-          <Link to="/my_friends">
-            <Button color="blue">
-              My Friends
-            </Button>
-          </Link>
         </div>
       );
     } else {
@@ -84,5 +87,10 @@ class Home extends React.Component {
     }
   }
 }
+
+const HeaderText = styled.h1`
+  color: white !important;
+  text-align: center;
+  `
 
 export default Home;
