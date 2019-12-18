@@ -1,4 +1,5 @@
 class Friend < ApplicationRecord
+  
 end
 
 

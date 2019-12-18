@@ -1,20 +1,19 @@
-import React from 'react';
+import React, { useState, useEffect, } from "react";
 import axios from 'axios';
 import { Link, } from 'react-router-dom';
 import { Header, Image, Card, Button, Icon, } from 'semantic-ui-react';
 import styled from 'styled-components';
+import FriendsForm from './FriendsForm';
 
-class Home extends React.Component {
-  state = { friends: [], };
-  
-  componentDidMount() {
-    axios.get('/api/friends')
-      .then(res => this.setState({ friends: res.data, }))
-  }
-  
-  sample = () => {
-    const { friends, } = this.state;
+const Home = () => {
+  const [friends, setfriends] = useState([]);
 
+  useEffect( () => {
+    axios.get("/api/friends")
+      .then( res => setfriends(res.data) )
+  }, []);
+  
+  const sample = () => {
     if (friends.length) {
       const index = Math.floor(Math.random() * friends.length);
       return friends[index];
@@ -22,36 +21,35 @@ class Home extends React.Component {
       return null;
     }
   }
-  
-    downVote = (id) => {
-      const { friends, } = this.state;
-      this.setState({ friends: friends.filter( friend => friend.id !== id ), });
+    const downVote = (id) => {
+      const newFriends = friends.filter( f => f.id !== id);
+      setfriends(newFriends);
+    };
+
+    const friendRequest = (id) => {
+      axios.put(`/api/friends/${id}`)
+      .then( res => setfriends({ friends: friends.filter( f => f.id !== id), }))
     }
 
-    friendRequest = (id) => {
-      const { friends, } = this.state
-      axios.put(`/api/friends/${id}`)
-      .then( () => this.setState({ friends: friends.filter( f => f.id !== id), }))
-    }
-  
-  
-  render() {
-    const friend = this.sample();
+    const addFriend = (friend) => setfriends([ friend, ...friends,  ]);
+    
+    const friend = sample();
     if (friend) {
       return (
         <div>
           <br />
           <Header as={HeaderText}>Friend Burk: Suggested Friends</Header>
+        < FriendsForm add={addFriend}/>
           <br />
-          <Link to="/my_friends">
-            <Button color="blue">
-              My Friends
-            </Button>
+      <Link to="/my_friends">
+        <Button color="blue">
+          My Friends
+        </Button>
+      </Link>
           <br />
-          </Link>
           <hr />
           <Card.Group itemsPerRow={4}>
-        { this.state.friends.map( friend =>
+        { friends.map( friend =>
           <Card key={friend.id}>
             <Image src={friend.avatar} />
             <Card.Content>
@@ -67,12 +65,12 @@ class Home extends React.Component {
             </Card.Content>
             <Card.Content extra>
               <Button color="red" icon basic
-              onClick={() => this.downVote(friend.id)}
+              onClick={() => downVote(friend.id)}
               >
                 <Icon name="eye slash" />
               </Button>
               <Button color="green" icon basic
-              onClick={() => this.friendRequest(friend.id)}
+              onClick={() => friendRequest(friend.id)}
               >
                 <Icon name="heart" />
               </Button>
@@ -86,7 +84,7 @@ class Home extends React.Component {
       return <Header textAlign="center">No More Cats</Header>
     }
   }
-}
+
 
 const HeaderText = styled.h1`
   color: white !important;
@@ -94,3 +92,5 @@ const HeaderText = styled.h1`
   `
 
 export default Home;
+
+

@@ -32,6 +32,7 @@ const App = () => (
 )
 
 const AppContainer = styled.div`
+
 background-color:black;
 background-image:
 radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 40px),
