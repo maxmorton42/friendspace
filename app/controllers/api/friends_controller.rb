@@ -1,5 +1,6 @@
 class Api::FriendsController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_friend, only: [:destroy ]
   def index
     render json: User.random_friend(current_user.friend_status)
   end
@@ -13,6 +14,10 @@ class Api::FriendsController < ApplicationController
     end
   end
 
+  def destroy
+    render json: @friend.destroy
+  end
+
   def update
     current_user.friend_status << params[:id].to_i
     current_user.save
@@ -21,6 +26,9 @@ class Api::FriendsController < ApplicationController
   private
   def friend_params
     params.require(:friend).permit(:name, :age, :job, :avatar)
+  end
+  def set_friend
+    @friend = Friend.find(params[:id])
   end
 end
 

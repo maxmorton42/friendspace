@@ -1,6 +1,6 @@
 import React, { useState, useEffect, } from "react";
 import axios from 'axios';
-import { Card, Divider, Image, } from 'semantic-ui-react';
+import { Card, Divider, Image, Icon, Button } from 'semantic-ui-react';
 
 const MyFriends = () => {
   const [friends, setfriends ] = useState([])
@@ -9,6 +9,11 @@ const MyFriends = () => {
     axios.get("api/friend_status")
     .then ( res => setfriends(res.data))
   }, [])
+
+  const deleteFriend = (id) => {
+    axios.delete(`/api/friends/${id}`)
+    .then( res => setfriends(friends.filter( f => f.id !== id), ))
+  }
 
   return (
     <Card.Group itemsPerRow={4}>
@@ -20,6 +25,11 @@ const MyFriends = () => {
             <Card.Header>
               { friend.name }
             </Card.Header>
+            <Button color="green" icon basic
+              onClick={() => deleteFriend(friend.id)}
+              >
+                <Icon name="trash alternate" />
+              </Button>
           </Card.Content>
         </Card>
       ))}

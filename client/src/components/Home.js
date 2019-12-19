@@ -28,10 +28,15 @@ const Home = () => {
 
     const friendRequest = (id) => {
       axios.put(`/api/friends/${id}`)
-      .then( res => setfriends({ friends: friends.filter( f => f.id !== id), }))
+      .then( res => setfriends(friends.filter( f => f.id !== id), ))
     }
 
     const addFriend = (friend) => setfriends([ friend, ...friends,  ]);
+
+  const deleteFriend = (id) => {
+    axios.delete(`/api/friends/${id}`)
+    .then( res => setfriends(friends.filter( f => f.id !== id), ))
+  }
     
     const friend = sample();
     if (friend) {
@@ -73,6 +78,11 @@ const Home = () => {
               onClick={() => friendRequest(friend.id)}
               >
                 <Icon name="heart" />
+              </Button>
+              <Button color="green" icon basic
+              onClick={() => deleteFriend(friend.id)}
+              >
+                <Icon name="trash alternate" />
               </Button>
             </Card.Content>
           </Card>

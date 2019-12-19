@@ -11,7 +11,7 @@
   name = Faker::Books::Dune.character
   age = Faker::Number.number(digits: 2)
   job = Faker::Books::Dune.title
-  avatar = Faker::Avatar.image(slug: name, size: '100x400', format: 'png', set: 'set4')
+  avatar = Faker::Avatar.image(slug: name, size: '100x235', format: 'png', set: 'set4')
   Friend.create(name: name, age: age, job: job, avatar: avatar)
 end
 
