@@ -33,10 +33,10 @@ const Home = () => {
 
     const addFriend = (friend) => setfriends([ friend, ...friends,  ]);
 
-  const deleteFriend = (id) => {
-    axios.delete(`/api/friends/${id}`)
-    .then( res => setfriends(friends.filter( f => f.id !== id), ))
-  }
+    const deleteFriend = (id) => {
+      axios.delete(`/api/friends/${id}`)
+      .then( res => setfriends(friends.filter( f => f.id !== id), ))
+    }
     
     const friend = sample();
     if (friend) {
@@ -84,6 +84,15 @@ const Home = () => {
               >
                 <Icon name="trash alternate" />
               </Button>
+
+              <Link to={`friends/${friend.id}`}>
+
+              <Button color="green" icon basic
+              >
+                <Icon name="id card" />
+              </Button>
+              </Link>
+
             </Card.Content>
           </Card>
         )}
@@ -91,7 +100,7 @@ const Home = () => {
         </div>
       );
     } else {
-      return <Header textAlign="center">No More Cats</Header>
+      return <Header textAlign="center">No More Friend Suggestions</Header>
     }
   }
 

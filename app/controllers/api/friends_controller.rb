@@ -1,8 +1,12 @@
 class Api::FriendsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_friend, only: [:destroy ]
+  before_action :set_friend, only: [:destroy, :show, ]
   def index
     render json: User.random_friend(current_user.friend_status)
+  end
+
+  def show
+    render json: @friend
   end
 
   def create

@@ -9,6 +9,7 @@ import { Switch, Route, } from 'react-router-dom';
 import { Container, } from "semantic-ui-react";
 import FetchUser from './components/FetchUser';
 import ProtectedRoute from './components/ProtectedRoute'
+import FriendShow from './components/FriendShow'
 import styled from 'styled-components';
 
 
@@ -19,10 +20,11 @@ const App = () => (
     <FetchUser>
     <Container>
       <Switch>
-        <ProtectedRoute exact path="/" component={Home} />
-        <ProtectedRoute exact path='/my_friends' component={MyFriends} />
         <Route exact path="/login" component={Login} />
         <Route exact path="/register" component={Register} />
+        <ProtectedRoute exact path="/" component={Home} />
+        <ProtectedRoute exact path='/my_friends' component={MyFriends} />
+        <ProtectedRoute exact path="/friends/:id" component={FriendShow} />
         <Route component={NoMatch} />
       </Switch>
     </Container>
@@ -33,8 +35,11 @@ const App = () => (
 
 const AppContainer = styled.div`
 
+
+
 background-color:black;
 background-image:
+
 radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 40px),
 radial-gradient(white, rgba(255,255,255,.15) 1px, transparent 30px),
 radial-gradient(white, rgba(255,255,255,.1) 2px, transparent 40px),

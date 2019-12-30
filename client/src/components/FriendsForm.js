@@ -6,7 +6,7 @@ const FriendsForm = (props) => {
   const [name, setName] = useState("");
   const [age, setAge] = useState("");
   const [job, setJob] = useState("");
-  const [avatar, setAvatar] = useState("https://upload.wikimedia.org/wikipedia/en/thumb/0/00/The_Child_aka_Baby_Yoda_%28Star_Wars%29.jpg/220px-The_Child_aka_Baby_Yoda_%28Star_Wars%29.jpg")
+  const [avatar] = useState("https://upload.wikimedia.org/wikipedia/en/thumb/0/00/The_Child_aka_Baby_Yoda_%28Star_Wars%29.jpg/220px-The_Child_aka_Baby_Yoda_%28Star_Wars%29.jpg")
   
   const handleNameChange = (e) => {
     setName(e.target.value);
