@@ -100,7 +100,7 @@ const Home = () => {
         </div>
       );
     } else {
-      return <Header textAlign="center">No More Friend Suggestions</Header>
+      return  < FriendsForm add={addFriend}/>
     }
   }
 
