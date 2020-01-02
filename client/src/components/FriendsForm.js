@@ -61,7 +61,7 @@ return (
             value={job}
           />
         </Form.Group>
-        <Form.Button>Submit</Form.Button>
+        <Form.Button>Add Friend</Form.Button>
       </Form>
     </>
   )

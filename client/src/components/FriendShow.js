@@ -32,13 +32,15 @@ const FriendShow = (props) => {
           <List.Header as="h2">{post.title}</List.Header>
           <hr />
           <List.Description>
-            {post.description}
+          <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>{post.description}
           </List.Description>
+          <br />
+          <List.Description> {post.created_at}</List.Description>
         </Segment>
       ))
 
     }
-  
+
   return (
     <>
     <br></br>

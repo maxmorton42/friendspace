@@ -46,6 +46,12 @@ radial-gradient(white, rgba(255,255,255,.1) 2px, transparent 40px),
 radial-gradient(rgba(255,255,255,.4), rgba(255,255,255,.1) 2px, transparent 30px);
 background-size: 550px 550px, 350px 350px, 250px 250px, 150px 150px;
 background-position: 0 0, 40px 60px, 130px 270px, 70px 100px;
+border: 1px solid #000;
+
+    overflow: scroll;
+    width: 100vw;
+    height: 100vh;
+
 `;
 
 

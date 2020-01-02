@@ -13,14 +13,14 @@ const Home = () => {
       .then( res => setfriends(res.data) )
   }, []);
   
-  const sample = () => {
-    if (friends.length) {
-      const index = Math.floor(Math.random() * friends.length);
-      return friends[index];
-    } else {
-      return null;
-    }
-  }
+  // const sample = () => {
+  //   if (friends.length) {
+  //     const index = Math.floor(Math.random() * friends.length);
+  //     return friends[index];
+  //   } else {
+  //     return null;
+  //   }
+  // }
     const downVote = (id) => {
       const newFriends = friends.filter( f => f.id !== id);
       setfriends(newFriends);
@@ -38,8 +38,7 @@ const Home = () => {
       .then( res => setfriends(friends.filter( f => f.id !== id), ))
     }
     
-    const friend = sample();
-    if (friend) {
+
       return (
         <div>
           <br />
@@ -48,7 +47,7 @@ const Home = () => {
           <br />
       <Link to="/my_friends">
         <Button color="blue">
-          My Friends
+          My Top Friends
         </Button>
       </Link>
           <br />
@@ -72,12 +71,12 @@ const Home = () => {
               <Button color="red" icon basic
               onClick={() => downVote(friend.id)}
               >
-                <Icon name="eye slash" />
+                <Icon name="thumbs down" />
               </Button>
               <Button color="green" icon basic
               onClick={() => friendRequest(friend.id)}
               >
-                <Icon name="heart" />
+                <Icon name="thumbs up" />
               </Button>
               <Button color="green" icon basic
               onClick={() => deleteFriend(friend.id)}
@@ -99,10 +98,8 @@ const Home = () => {
             </Card.Group>
         </div>
       );
-    } else {
-      return  < FriendsForm add={addFriend}/>
-    }
-  }
+    } 
+  
 
 
 const HeaderText = styled.h1`

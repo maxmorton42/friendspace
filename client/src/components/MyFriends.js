@@ -16,6 +16,9 @@ const MyFriends = () => {
   }
 
   return (
+    <>
+    <br /> <br />
+    <h1 style={{color: "white"}}>Your Top Friends</h1>
     <Card.Group itemsPerRow={4}>
       { friends.map( friend => (
         <Card key={friend.id}>
@@ -34,6 +37,7 @@ const MyFriends = () => {
         </Card>
       ))}
     </Card.Group>
+    </>
   );
 }
 
